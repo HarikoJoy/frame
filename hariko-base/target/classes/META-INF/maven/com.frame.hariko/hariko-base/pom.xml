@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-dependencies</artifactId>
+		<version>2.0.5.RELEASE</version>
+	</parent>
+
+	<groupId>com.frame.hariko</groupId>
+	<artifactId>hariko-base</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>hariko-base</name>
+	<description>build env, base properties, deploy properties</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.build.timestamp.format>yyyyMMdd_HHmmss</maven.build.timestamp.format>
+		<build.time>${maven.build.timestamp}</build.time>
+		<spring.boot.version>2.0.4.RELEASE</spring.boot.version>
+		<argLine>-Xmx512M -Dfile.encoding=UTF-8</argLine>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>deploy</id>
+			<properties>
+				<profile-id>deploy</profile-id>
+			</properties>
+			<distributionManagement>
+				<repository>
+					<id>releases-repo</id>
+					<name>Internal Releases</name>
+					<url>http://repo.dev.dashuf.com:8081/artifactory/libs-release-local/</url>
+				</repository>
+				<snapshotRepository>
+					<id>snapshot-repo</id>
+					<name>Development Snapshot</name>
+					<url>http://repo.dev.dashuf.com:8081/artifactory/libs-snapshot-local/</url>
+				</snapshotRepository>
+			</distributionManagement>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.8.1</version>
+						<configuration>
+							<!-- 不加此JVM启动参数,则在eclipse的console中输出乱码 -->
+							<additionalJOption>-J-Dfile.encoding=UTF-8</additionalJOption>
+							<encoding>UTF-8</encoding>
+							<charset>UTF-8</charset>
+							<docencoding>UTF-8</docencoding>
+							<source>1.7</source>
+							<show>private</show>
+							<links>
+								<link>http://docs.oracle.com/javase/6/docs/api</link>
+							</links>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>2.8</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<failsOnError>false</failsOnError>
+							<maxAllowedViolations>3</maxAllowedViolations>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>2.5</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<outputEncoding>UTF-8</outputEncoding>
+							<linkXref>true</linkXref>
+							<sourceEncoding>UTF-8</sourceEncoding>
+							<encoding>UTF-8</encoding>
+							<targetJdk>1.6</targetJdk>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+						<version>2.3.3</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<outputEncoding>UTF-8</outputEncoding>
+							<sourceEncoding>UTF-8</sourceEncoding>
+							<findbugsXmlOutput>true</findbugsXmlOutput>
+							<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+							<xmlOutput>true</xmlOutput>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<reporting>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.8.1</version>
+						<configuration>
+							<!-- 不加此JVM启动参数,则在eclipse的console中输出乱码 -->
+							<additionalJOption>-J-Dfile.encoding=UTF-8</additionalJOption>
+							<encoding>UTF-8</encoding>
+							<charset>UTF-8</charset>
+							<docencoding>UTF-8</docencoding>
+							<source>1.5</source>
+							<show>private</show>
+							<links>
+								<link>http://docs.oracle.com/javase/6/docs/api</link>
+							</links>
+						</configuration>
+					</plugin>
+					<plugin><!-- 生成源代码的有索引和交叉查询的HTML版本 -->
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jxr-plugin</artifactId>
+						<version>3.0.0</version>
+						<configuration>
+							<inputEncoding>UTF-8</inputEncoding>
+							<outputEncoding>UTF-8</outputEncoding>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>3.0.0</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<!-- configLocation>checkstyle/checkstyle5.xml</configLocation> -->
+							<!-- <headerLocation>wym/LICENSE.txt</headerLocation> -->
+						</configuration>
+					</plugin>
+					<plugin>
+						<!-- mvn pmd:pmd -->
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>2.5</version>
+						<configuration>
+							<linkXref>true</linkXref>
+							<sourceEncoding>UTF-8</sourceEncoding>
+							<minimumTokens>100</minimumTokens>
+							<targetJdk>1.6</targetJdk>
+							<rulesets>
+								<ruleset>/rulesets/basic.xml</ruleset>
+								<ruleset>/rulesets/imports.xml</ruleset>
+								<ruleset>/rulesets/unusedcode.xml</ruleset>
+								<ruleset>/rulesets/finalizers.xml</ruleset>
+							</rulesets>
+						</configuration>
+					</plugin>
+					<plugin><!-- mvn clean -Dmaven.compile.debug site -->
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+						<version>3.0.5</version>
+						<configuration>
+							<effort>Max</effort>
+							<threshold>Low</threshold>
+							<findbugsXmlOutput>true</findbugsXmlOutput>
+							<!-- Optional directory to put findbugs xml report -->
+							<findbugsXmlOutputDirectory>target</findbugsXmlOutputDirectory>
+							<!--<includeFilterFile>lib-filter.xml</includeFilterFile> -->
+						</configuration>
+					</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+	</profiles>
+
+	<build>
+		<!-- 命令行输入mvn时，默认执行mvn package -->
+		<defaultGoal>package</defaultGoal>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>mapper/*.xml</exclude>
+				</excludes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources/mapper</directory>
+				<targetPath>mapper/</targetPath>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>com.ning.maven.plugins</groupId>
+				<artifactId>maven-duplicate-finder-plugin</artifactId>
+				<version>1.0.8</version>
+			</plugin>
+			<plugin><!-- mvn help:describe -DgroupId=org.apache.maven.plugins -DartifactId=maven-jar-plugin 
+					使用此命令显示指定插件的用法时,2.6之前版本会出现中文乱码 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<!-- 读取java源文件时使用UTF-8编码,这样在解析java源文件中的注释时便不会出现中文乱码 -->
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+					<showDeprecation>true</showDeprecation>
+					<debug>true</debug>
+					<compilerArgs>
+						<!-- 将方法参数的名字保留在Java字节码中 -->
+						<arg>-parameters</arg>
+					</compilerArgs>
+					<!--Set to true to show messages about what the compiler is doing. -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<!-- set encoding to something not platform dependent -->
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<!--<useDefaultDelimiters>false</useDefaultDelimiters> -->
+					<!--<delimiters>@{*}</delimiters> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- dependency插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+			<!-- surefire插件, 设定单元测试时只执行unit目录下的用例 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-testng</artifactId>
+						<version>2.11</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.20.1</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<!--<skip>true</skip> -->
+					<!-- 注意,这里不建议用methods,可能会导致spring 测试框架的事务失效 -->
+					<parallel>classes</parallel>
+					<threadCount>5</threadCount>
+					<!-- <excludedGroups>integration</excludedGroups> -->
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/integration/**/*Test.java</exclude>
+					</excludes>
+					<forkMode>once</forkMode>
+					<reportFormat>xml</reportFormat>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<groups>integration</groups>
+					<includes>
+						<include>**/integration/**/*Test.java</include>
+					</includes>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>site</phase>
+						<configuration>
+							<tasks>
+								<copy todir="target/classes">
+									<fileset dir="src/main/java">
+										<include name="**/*.java" />
+									</fileset>
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<locales>zh_CN</locales>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
+			</plugin>
+			<!-- jar插件, 设定manifest文件内容 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/logback-test.xml</exclude>
+						<exclude>**/*-filter.properties</exclude>
+					</excludes>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!--<webappDirectory>/sample/servlet/container/deploy/directory</webappDirectory> -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.6</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+					<includePom>true</includePom>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin><!-- 旧版本存在BUG,当指定了classifier时,不install POM文件 -->
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.3.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring.boot.version}</version>
+					<configuration>
+						<excludeDevtools>true</excludeDevtools>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.gmavenplus</groupId>
+					<artifactId>gmavenplus-plugin</artifactId>
+					<version>1.4</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>testCompile</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[3.0.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+											<goal>unpack</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<!-- <execute> <runOnIncremental>false</runOnIncremental> </execute> -->
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>pl.project13.maven</groupId>
+					<artifactId>git-commit-id-plugin</artifactId>
+					<version>2.2.1</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>revision</goal>
+							</goals>
+						</execution>
+					</executions>
+
+					<configuration>
+						<!-- If you'd like to tell the plugin where your .git directory is, 
+							use this setting, otherwise we'll perform a search trying to figure out the 
+							right directory. It's better to add it explicitly IMHO. -->
+						<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+
+						<!-- that's the default value, you don't have to set it -->
+						<prefix>git</prefix>
+
+						<!-- that's the default value -->
+						<dateFormat>yyyy.MM.dd HH:mm:ss </dateFormat>
+
+						<!-- @since 2.2.0 -->
+						<!-- If you want to set the timezone of the dateformat to anything 
+							in particular you can do this by using this option. As a general warning 
+							try to avoid three-letter time zone IDs because the same abbreviation are 
+							often used for multiple time zones. The default value we'll use the timezone 
+							use the timezone that's shipped with java (java.util.TimeZone.getDefault().getID()). 
+							*Note*: If you plan to set the java's timezone by using `MAVEN_OPTS=-Duser.timezone=UTC 
+							mvn clean package`, `mvn clean package -Duser.timezone=UTC` or any other 
+							configuration keep in mind that this option will override those settings 
+							and will not take other configurations into account! -->
+						<dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
+
+						<!-- false is default here, it prints some more information during 
+							the build -->
+						<verbose>false</verbose>
+
+						<!-- ALTERNATE SETUP - GENERATE FILE -->
+						<!-- If you want to keep git information, even in your WAR file etc, 
+							use this mode, which will generate a properties file (with filled out values) 
+							which you can then normally read using new Properties().load(/**/) -->
+
+						<!-- this is false by default, forces the plugin to generate the git.properties 
+							file -->
+						<generateGitPropertiesFile>false</generateGitPropertiesFile>
+
+						<!-- The path for the to be generated properties file, it's relative 
+							to ${project.basedir} The default value is ${project.build.outputDirectory}/git.properties -->
+						<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+
+						<!-- Denotes the format to save properties in. Valid options are "properties" 
+							(default) and "json". Properties will be saved to the generateGitPropertiesFilename 
+							if generateGitPropertiesFile is set to `true`. -->
+						<format>properties</format>
+
+						<!-- this is true by default; You may want to set this to false, if 
+							the plugin should run inside a <packaging>pom</packaging> project. Most projects 
+							won't need to override this property. For an use-case for this kind of behaviour 
+							see: https://github.com/ktoso/maven-git-commit-id-plugin/issues/21 -->
+						<skipPoms>true</skipPoms>
+
+						<!-- @since 2.1.4 -->
+						<!-- Tell maven-git-commit-id to inject the git properties into all 
+							reactor projects not just the current one. For details about why you might 
+							want to skip this, read this issue: https://github.com/ktoso/maven-git-commit-id-plugin/pull/65 
+							The property is set to ``false`` by default to prevent the overriding of 
+							properties that may be unrelated to the project. -->
+						<injectAllReactorProjects>false</injectAllReactorProjects>
+
+						<!-- @since 2.0.4 -->
+						<!-- true by default, controls whether the plugin will fail when no 
+							.git directory is found, when set to false the plugin will just skip execution -->
+						<failOnNoGitDirectory>true</failOnNoGitDirectory>
+
+						<!-- @since 2.1.5 -->
+						<!-- true by default, controls whether the plugin will fail if it was 
+							unable to obtain enough data for a complete run, if you don't care about 
+							this, you may want to set this value to false. -->
+						<failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>
+
+						<!-- @since 2.1.8 -->
+						<!-- skip the plugin execution completely. This is useful for e.g. 
+							profile activated plugin invocations or to use properties to enable / disable 
+							pom features. Default value is 'false'. -->
+						<skip>false</skip>
+
+						<!-- @since 2.1.12 -->
+						<!-- Use with caution! In a multi-module build, only run once. This 
+							means that the plugins effects will only execute once, for the parent project. 
+							This probably won't "do the right thing" if your project has more than one 
+							git repository. Important: If you're using `generateGitPropertiesFile`, setting 
+							`runOnlyOnce` will make the plugin only generate the file in the directory 
+							where you started your build (!). The `git.*` maven properties are available 
+							in all modules. Default value is `false`. -->
+						<runOnlyOnce>false</runOnlyOnce>
+
+						<!-- @since 2.1.9 -->
+						<!-- Can be used to exclude certain properties from being emitted into 
+							the resulting file. May be useful when you want to hide {@code git.remote.origin.url} 
+							(maybe because it contains your repo password?), or the email of the committer 
+							etc. Each value may be globbing, that is, you can write {@code git.commit.user.*} 
+							to exclude both, the {@code name}, as well as {@code email} properties from 
+							being emitted into the resulting files. Please note that the strings here 
+							are Java regexes ({@code .*} is globbing, not plain {@code *}). -->
+						<excludeProperties>
+							<!-- <excludeProperty>git.user.*</excludeProperty> -->
+						</excludeProperties>
+
+						<!-- @since 2.1.14 -->
+						<!-- Can be used to include only certain properties into the resulting 
+							file. Will be overruled by the exclude properties. Each value may be globbing, 
+							that is, you can write {@code git.commit.user.*} to include both, the {@code 
+							name}, as well as {@code email} properties into the resulting files. Please 
+							note that the strings here are Java regexes ({@code .*} is globbing, not 
+							plain {@code *}). -->
+						<includeOnlyProperties>
+							<!-- <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> -->
+						</includeOnlyProperties>
+
+						<!-- @since 2.1.10 -->
+						<!-- false is default here, if set to true it uses native `git` executable 
+							for extracting all data. This usually has better performance than the default 
+							(jgit) implementation, but requires you to have git available as executable 
+							for the build as well as *might break unexpectedly* when you upgrade your 
+							system-wide git installation. As rule of thumb - stay on `jgit` (keep this 
+							`false`) until you notice performance problems. -->
+						<useNativeGit>false</useNativeGit>
+
+						<!-- @since v2.0.4 -->
+						<!-- Controls the length of the abbreviated git commit it (git.commit.id.abbrev) 
+							Defaults to `7`. `0` carries the special meaning. Maximum value is `40`, 
+							because of max SHA-1 length. -->
+						<abbrevLength>7</abbrevLength>
+
+
+						<!-- @since v2.2.0 -->
+						<!-- The option can be used to tell the plugin how it should generate 
+							the 'git.commit.id' property. Due to some naming issues when exporting the 
+							properties as an json-object (https://github.com/ktoso/maven-git-commit-id-plugin/issues/122) 
+							we needed to make it possible to export all properties as a valid json-object. 
+							Due to the fact that this is one of the major properties the plugin is exporting 
+							we just don't want to change the exporting mechanism and somehow throw the 
+							backwards compatibility away. We rather provide a convenient switch where 
+							you can choose if you would like the properties as they always had been, 
+							or if you rather need to support full json-object compatibility. In the case 
+							you need to fully support json-object we unfortunately need to change the 
+							'git.commit.id' property from 'git.commit.id' to 'git.commit.id.full' in 
+							the exporting mechanism to allow the generation of a fully valid json object. 
+							Currently the switch allows two different options: 1. By default this property 
+							is set to 'flat' and will generate the formerly known property 'git.commit.id' 
+							as it was in the previous versions of the plugin. Keeping it to 'flat' by 
+							default preserve backwards compatibility and does not require further adjustments 
+							by the end user. 2. If you set this switch to 'full' the plugin will export 
+							the formerly known property 'git.commit.id' as 'git.commit.id.full' and therefore 
+							will generate a fully valid json object in the exporting mechanism. *Note*: 
+							Depending on your plugin configuration you obviously can choose the 'prefix' 
+							of your properties by setting it accordingly in the plugin's configuration. 
+							As a result this is therefore only an illustration what the switch means 
+							when the 'prefix' is set to it's default value. *Note*: If you set the value 
+							to something that's not equal to 'flat' or 'full' (ignoring the case) the 
+							plugin will output a warning and will fallback to the default 'flat' mode. -->
+						<commitIdGenerationMode>flat</commitIdGenerationMode>
+
+						<!-- @since 2.1.0 -->
+						<!-- read up about git-describe on the in man, or it's homepage - it's 
+							a really powerful versioning helper and the recommended way to use git-commit-id-plugin. 
+							The configuration bellow is optional, by default describe will run "just 
+							like git-describe on the command line", even though it's a JGit reimplementation. -->
+						<gitDescribe>
+
+							<!-- don't generate the describe property -->
+							<skip>false</skip>
+
+							<!-- if no tag was found "near" this commit, just print the commit's 
+								id instead, helpful when you always expect this field to be not-empty -->
+							<always>false</always>
+							<!-- how many chars should be displayed as the commit object id? 7 
+								is git's default, 0 has a special meaning (see end of this README.md), and 
+								40 is the maximum value here -->
+							<abbrev>7</abbrev>
+
+							<!-- when the build is triggered while the repo is in "dirty state", 
+								append this suffix -->
+							<dirty>-dirty</dirty>
+
+							<!-- Only consider tags matching the given pattern. This can be used 
+								to avoid leaking private tags from the repository. -->
+							<match>*</match>
+
+							<!-- always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" 
+								format, even if "on" a tag. The distance will always be 0 if you're "on" 
+								the tag. -->
+							<forceLongFormat>false</forceLongFormat>
+						</gitDescribe>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
