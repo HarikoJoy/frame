@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.frame.hariko</groupId>
+		<artifactId>hariko-springboot-base</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>hariko-springboot-logger</artifactId>
+
+	<properties>
+		<write.text.files>1.1</write.text.files>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.frame.hariko</groupId>
+			<artifactId>hariko-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>ru.yaal.maven</groupId>
+				<artifactId>write-text-files-maven-plugin</artifactId>
+				<version>${write.text.files}</version>
+				<configuration>
+					<charset>UTF-8</charset>
+					<files>
+						<file>
+							<path>target/classes/META-INF/self.properties</path>
+							<lines>
+								<line>artifactId=${project.artifactId}</line>
+								<line>groupId=${project.groupId}</line>
+								<line>version=${project.version}</line>
+							</lines>
+						</file>
+					</files>
+				</configuration>
+				<executions>
+					<execution>
+						<id>write-text-files</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>write-text-files</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

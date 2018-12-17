@@ -25,7 +25,7 @@
 		<poi.version>4.0</poi.version>
 		<filters.base.path>src/filters</filters.base.path>
 		<java.security.provider.bc.version>1.46</java.security.provider.bc.version>
-		<hariko.verion>2.0.0-SNAPSHOT</hariko.verion><!-- add for replace -->
+		<hariko.version>0.0.1-SNAPSHOT</hariko.version><!-- add for replace -->
 	</properties>
 
 

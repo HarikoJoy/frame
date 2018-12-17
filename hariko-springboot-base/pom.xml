@@ -21,4 +21,19 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.frame.hariko</groupId>
+				<artifactId>hariko-mybatis-plugin</artifactId>
+				<version>${hariko.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.frame.hariko</groupId>
+				<artifactId>hariko-core</artifactId>
+				<version>${hariko.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>

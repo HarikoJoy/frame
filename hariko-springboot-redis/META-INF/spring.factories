@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.dashuf.merlin.springboot.redis.idgenerator.RedisIdgeneratorAutoConfiguration
