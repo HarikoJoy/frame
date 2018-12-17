@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>com.frame.hariko</groupId>
 			<artifactId>hariko-web</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${hariko.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

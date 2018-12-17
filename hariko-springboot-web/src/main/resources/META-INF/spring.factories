@@ -1,0 +1,10 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.frame.hariko.springboot.web.swagger2.Swagger2AutoConfigure,\
+com.frame.hariko.springboot.web.rest.RestTemplateAutoConfigure,\
+com.frame.hariko.springboot.web.filters.FilterAutoConfigure,\
+com.frame.hariko.springboot.web.cors.CorsAutoConfigure,\
+com.frame.hariko.springboot.web.exception.MerlinErrorMvcAutoConfigure,\
+com.frame.hariko.springboot.web.interceptors.InterceptorAutoConfigure,\
+com.frame.hariko.springboot.web.SpringMvcAutoConfigure,\
+com.frame.hariko.springboot.web.jackson.JacksonAutoConfiguration

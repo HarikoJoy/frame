@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.frame.hariko.spring.boot.cache.redis.idgenerator.RedisIdgeneratorAutoConfiguration
