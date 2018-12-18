@@ -1,0 +1,78 @@
+buildscript {
+	ext {
+		maven = [
+			public: 'https://maven.aliyun.com/repository/public',
+			grails: 'https://maven.aliyun.com/repository/grails-core',
+			gradle: 'https://maven.aliyun.com/repository/gradle-plugin',
+			central: 'https://maven.aliyun.com/repository/central'
+		]
+		dependencies = [
+			hariko_web: 'com.frame.hariko:hariko-springboot-web:0.0.1-SNAPSHOT',
+			hariko_db: 'com.frame.hariko:db-spring-boot-starter:0.0.1-SNAPSHOT',
+			hariko_cache: 'com.frame.hariko:cache-spring-boot-starter:0.0.1-SNAPSHOT',
+			hariko_test: 'com.frame.hariko:hariko-springboot-test:0.0.1-SNAPSHOT',
+			hariko_job: 'com.frame.hariko:job-spring-boot-starter:0.0.1-SNAPSHOT',
+			hariko_cloud: 'com.frame.hariko:hariko-spring-cloud-starter:0.0.1-SNAPSHOT',
+			hariko_token: 'com.frame.hariko:token-spring-boot-starter:0.0.1-SNAPSHOT',
+			mysql8: 'mysql:mysql-connector-java:8.0.11',
+			lombok: 'org.projectlombok:lombok:1.14.8',
+			fastjson: 'com.alibaba:fastjson:1.2.49',
+			poi: 'org.apache.poi:poi:4.0.0',
+			poi_ooxml: 'org.apache.poi:poi-ooxml:4.0.0',
+			redis: 'org.springframework.boot:spring-boot-starter-data-redis:2.0.5.RELEASE',
+			mail: 'org.springframework.boot:spring-boot-starter-mail:2.0.5.RELEASE'
+		]
+	}
+	repositories {
+		//maven { url maven.grails }
+		maven { url maven.gradle }
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE"
+		classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.5.2"
+		classpath "io.franzbecker:gradle-lombok:1.14"
+	}
+}
+apply plugin: org.springframework.boot.gradle.plugin.SpringBootPlugin
+apply plugin: com.gorylenko.GitPropertiesPlugin
+apply plugin: io.franzbecker.gradle.lombok.LombokPlugin
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+jacoco{ toolVersion = "0.8.2" }
+repositories {
+	mavenLocal()
+	maven { url 'file:///D:/Mycache/.m2/repo/'}
+
+	maven{
+		url rootProject.ext.maven.grails
+	}
+	maven{
+		url rootProject.ext.maven.gradle
+	}
+
+	maven {
+		url rootProject.ext.maven.central
+	}
+}
+
+group = 'com.frame.hariko'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+def ver = rootProject.ext.dependencies
+dependencies {
+	// 引入基础框架
+	compile ver['hariko_web']
+	compile ver['hariko_cloud']
+	compile ver['hariko_db']
+	compile ver['mysql8']
+	compile ver['hariko_job']
+	compile ver['lombok']
+	testCompile ver['hariko_test']
+}

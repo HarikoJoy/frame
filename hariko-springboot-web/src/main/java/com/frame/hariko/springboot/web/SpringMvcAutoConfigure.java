@@ -6,8 +6,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.dashuf.merlin.springboot.web.controller")
+@ComponentScan("com.frame.hariko.springboot.web.controller")
 public class SpringMvcAutoConfigure {
-
 
 }
