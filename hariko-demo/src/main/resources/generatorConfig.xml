@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <context id="application-center-service" targetRuntime="MyBatis3"
+             defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="com.frame.hariko.mybatis.plugin.RenameFileNamePlugin">
+            <property name="searchString" value="T_"/>
+            <property name="replaceString" value=""/>
+            <property name="prefix" value=""/>
+            <property name="suffix" value="Mapper.xml"/>
+        </plugin>
+
+        <plugin type="com.frame.hariko.mybatis.plugin.AddAnnotationsAndImportsPlugin">
+            <property name="imports"
+                      value="org.apache.ibatis.annotations.Mapper,java.util.List,org.apache.ibatis.annotations.Param"/>
+            <property name="annotations" value="@Mapper"/>
+        </plugin>
+
+        <plugin type="com.frame.hariko.mybatis.plugin.CountByModelSelectivePlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.DeleteByModelSelectivePlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.UpdateByModelSelectivePlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.DynamicModelSqlPlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.BaseColumnListWithPrefixPlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.SelectByModelSelectivePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.BatchInsertPlugin"/>
+        <plugin type="com.frame.hariko.mybatis.plugin.SelectOneByModelSelectivePlugin"/>
+        
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://t1crawler.mysql.dbuat.dsfdc.com:4567/hariko?useUnicode=yes&amp;characterEncoding=UTF8&amp;useSSL=false"
+                        userId="deployop" password="Tfc09a45759e8#">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.frame.hariko.entity"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.frame.hariko.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--运营商表-->
+        <table tableName="student" domainObjectName="Student"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

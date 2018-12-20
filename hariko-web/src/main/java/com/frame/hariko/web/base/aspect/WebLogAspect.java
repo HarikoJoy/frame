@@ -27,7 +27,7 @@ public class WebLogAspect {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private final String httpStartTime = "HTTP_START_TIME";
 
-    @Pointcut("execution(public com.dashuf.merlin.web.base.views.ResponseVo com.dashuf..*Controller.*(..))")
+    @Pointcut("execution(public com.frame.hariko.web.base.views.ResponseVo com.frame.hariko..*Controller.*(..))")
     public void webLog() {
     }
 

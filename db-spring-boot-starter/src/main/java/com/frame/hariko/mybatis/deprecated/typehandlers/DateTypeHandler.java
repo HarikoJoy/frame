@@ -1,4 +1,4 @@
-package com.dashuf.merlin.mybatis.deprecated.typehandlers;
+package com.frame.hariko.mybatis.deprecated.typehandlers;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

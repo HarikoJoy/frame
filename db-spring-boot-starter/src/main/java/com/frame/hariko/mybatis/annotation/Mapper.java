@@ -1,7 +1,7 @@
 /*******************************************************************************
  * rda
  ******************************************************************************/
-package com.dashuf.merlin.mybatis.annotation;
+package com.frame.hariko.mybatis.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

@@ -69,7 +69,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import com.frame.hariko.tx.MerlinProxyTransactionManagementConfiguration;
+import com.frame.hariko.tx.HarikoProxyTransactionManagementConfiguration;
 import com.github.pagehelper.PageInterceptor;
 
 @org.springframework.context.annotation.Configuration
@@ -77,7 +77,7 @@ import com.github.pagehelper.PageInterceptor;
 @ConditionalOnBean(DataSource.class)
 @EnableConfigurationProperties({ MybatisProperties.class, PageHelperProperties.class })
 @EnableTransactionManagement(proxyTargetClass = true, order = 200)
-@Import(MerlinProxyTransactionManagementConfiguration.class)
+@Import(HarikoProxyTransactionManagementConfiguration.class)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class MybatisAutoConfiguration {
 

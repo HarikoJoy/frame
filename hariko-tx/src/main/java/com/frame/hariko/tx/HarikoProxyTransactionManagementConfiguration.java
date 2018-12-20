@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.ProxyTransactionManagementConf
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 
 @Configuration
-public class MerlinProxyTransactionManagementConfiguration extends ProxyTransactionManagementConfiguration {
+public class HarikoProxyTransactionManagementConfiguration extends ProxyTransactionManagementConfiguration {
 
 	@Bean
 	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 	public TransactionAttributeSource transactionAttributeSource() {
-		return new MerlinAnnotationTransactionAttributeSource();
+		return new HarikoAnnotationTransactionAttributeSource();
 	}
 
 }

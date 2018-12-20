@@ -5,13 +5,13 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 
 import java.lang.reflect.AnnotatedElement;
 
-public class MerlinAnnotationTransactionAttributeSource extends AnnotationTransactionAttributeSource {
+public class HarikoAnnotationTransactionAttributeSource extends AnnotationTransactionAttributeSource {
 
     @Override
     protected TransactionAttribute determineTransactionAttribute(AnnotatedElement ae) {
         TransactionAttribute transactionAttribute = super.determineTransactionAttribute(ae);
         if(transactionAttribute != null){
-            transactionAttribute = new MerlinTransactionAttribute(transactionAttribute);
+            transactionAttribute = new HarikoTransactionAttribute(transactionAttribute);
         }
         return transactionAttribute;
     }

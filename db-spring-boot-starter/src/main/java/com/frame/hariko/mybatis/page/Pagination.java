@@ -1,4 +1,4 @@
-package com.dashuf.merlin.mybatis.page;
+package com.frame.hariko.mybatis.page;
 
 import com.github.pagehelper.IPage;
 

@@ -3,13 +3,13 @@ package com.frame.hariko.tx;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 
-public class MerlinTransactionAttribute extends DefaultTransactionAttribute {
+public class HarikoTransactionAttribute extends DefaultTransactionAttribute {
 
-	public MerlinTransactionAttribute() {
+	public HarikoTransactionAttribute() {
 		super();
 	}
 
-	public MerlinTransactionAttribute(TransactionAttribute ta) {
+	public HarikoTransactionAttribute(TransactionAttribute ta) {
 		super(ta);
 	}
 
