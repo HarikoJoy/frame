@@ -20,6 +20,8 @@ bin/
 build/
 out/
 src/main/resources/META-INF/app.properties
+gradlew
+gradlew.bat
 
 ### IntelliJ IDEA ###
 .idea
