@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.frame.hariko.springboot.actuate.endpoint.autoconfigure.DruidEndpointAutoConfigure,\
-com.frame.hariko.springboot.actuate.endpoint.autoconfigure.GitStateEndpointAutoConfigure,\
-com.frame.hariko.springboot.actuate.endpoint.autoconfigure.EnvironmentEndpointAutoConfigure
+com.frame.hariko.springboot.actuator.autoconfigure.DruidEndpointAutoConfigure,\
+com.frame.hariko.springboot.actuator.autoconfigure.GitStateEndpointAutoConfigure,\
+com.frame.hariko.springboot.actuator.autoconfigure.EnvironmentEndpointAutoConfigure

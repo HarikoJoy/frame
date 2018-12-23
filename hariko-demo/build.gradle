@@ -47,7 +47,7 @@ apply plugin: 'io.spring.dependency-management'
 jacoco{ toolVersion = "0.8.2" }
 repositories {
 
-	maven { url 'file:///D:/Mycache/.m2/repo/'}
+	maven { url 'file:///D:/cache/.m2/repo'}
 	maven {
 		url rootProject.ext.maven.central
 	}
