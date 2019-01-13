@@ -31,6 +31,8 @@ buildscript {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE"
 		classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.5.2"
 		classpath "io.franzbecker:gradle-lombok:1.14"
+		classpath "dom4j:dom4j:1.6.1"
+		classpath "xstream:xstream:1.2.2"
 	}
 }
 apply plugin: org.springframework.boot.gradle.plugin.SpringBootPlugin
